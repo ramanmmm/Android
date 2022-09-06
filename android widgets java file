@@ -1,0 +1,70 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import java.util.Locale;
+
+public class MainActivity extends AppCompatActivity {
+    Button b1,b2;
+    CheckBox cb1,cb2,cb3;
+    RadioGroup rd;
+    RadioButton CommanRadioBtn;
+    AutoCompleteTextView autu;
+    String[] language={"c","c++","java","kotlin","js","asp","python","c#","go","pearl"};
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.widget);
+        b1=(Button)findViewById(R.id.b1);
+        b2=(Button)findViewById(R.id.btn);
+        cb1=(CheckBox)findViewById(R.id.cb1);
+        cb2=(CheckBox)findViewById(R.id.cb2);
+        cb3=(CheckBox)findViewById(R.id.cb3);
+        rd=(RadioGroup) findViewById(R.id.radiogroup);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int getvalue1or0= rd.getCheckedRadioButtonId();//ye radio button jav user click krega to uska id batata h jaise ki user ne radio button first bali click krdi to ye true yani ki 1 return krega ni to us button ke liye zeero return karega fir dusre radio button per check karega jake.
+                 CommanRadioBtn=(RadioButton)findViewById(getvalue1or0);//yaha per dono radio button ke liye comman 1 variable le liya h .
+                    if (getvalue1or0==-1){
+                        Toast.makeText(MainActivity.this,"please select gender",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this,CommanRadioBtn.getText(),Toast.LENGTH_LONG).show();
+                    }
+            }
+        });
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Button is clicked",Toast.LENGTH_LONG).show();
+            }
+        });
+        if(cb1.isChecked()){
+            //yaha per bo logic likho jab check box per koi click kare to kya ho,example toast priont karna ho
+            //ya koi logic likhna hai
+        }
+        if(cb2.isChecked()){
+
+        }
+        if(cb3.isChecked()){
+
+        }
+        //autocomplete text view ke liye hai code.
+        autu=(AutoCompleteTextView)findViewById(R.id.auto);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.select_dialog_item,language);
+        autu.setAdapter(adapter);
+        autu.setThreshold(1);//isme value jitni donge utne hi word ke baad suggestion dega//
+
+    }
+}
